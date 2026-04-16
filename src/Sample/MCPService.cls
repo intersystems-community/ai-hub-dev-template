@@ -1,4 +1,4 @@
-Class Sample.MCPServer Extends %AI.MCPServer
+Class Sample.MCPService Extends %AI.MCP.Service
 {
     Parameter SPECIFICATION = "Sample.ToolSet";
 }

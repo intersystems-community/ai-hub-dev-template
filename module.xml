@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Export generator="Cache" version="25">
-  <Document name="dc-sample.ZPM">
+  <Document name="ai-hub-dev-template.ZPM">
     <Module>
-      <Name>dc-sample</Name>
+      <Name>ai-hub-dev-template</Name>
       <Version>2.0.9</Version>
-      <Description>Basic InterSystems IRIS Development Template</Description>
+      <Description>AI Hub Development Template</Description>
       <Packaging>module</Packaging>
       <SourcesRoot>src</SourcesRoot>
-      <Resource Name="dc.sample.PKG"/>
-      <UnitTest Name="/tests" Package="dc.sample.unittests" Phase="test"/>
-
+      <Resource Name="Sample.PKG"/>
+      <Invoke Method="Run" Class="Sample.MCPSetup"/>
     </Module>
   </Document>
 </Export>

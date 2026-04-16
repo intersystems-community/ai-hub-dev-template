@@ -1,13 +1,13 @@
-Class Sample.ToolSet Extends %AI.ToolSet
+Class Sample.ToolSet Extends %AI.ToolSet [dependsOn=Sample.Tool, dependsOn=Sample.AuditPolicy, dependsOn=Sample.AuthPolicy]
 {
     XData Definition
     {
         <ToolSet>
             <Description>Sample Toolset</Description>
-            <Policy>
+            <Policies>
                 <Audit Class="Sample.AuditPolicy"></Audit>
-                <Authorization Class="Sample.AuthorizationPolicy"></Authorization>
-            </Policy>
+                <Authorization Class="Sample.AuthPolicy"></Authorization>
+            </Policies>
             <Include Class="Sample.Tool"></Include>
         </ToolSet>
     }    
