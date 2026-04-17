@@ -1,30 +1,40 @@
 Class Sample.Agent Extends %AI.Agent
 {
     /// LLM Provider
-    /// OpenAI API Key will automatically be read from the environment variable OPENAI_API_KEY
     Parameter PROVIDER = "openai";
 
     /// LLM Model
     Parameter MODEL = "gpt-5-nano";
 
-    /// Toolset that the agent can use
-    Parameter TOOLSET = "Sample.ToolSet";
-
+    /// Toolsets that the agent can use
+    Parameter TOOLSETS = "Sample.ToolSet";
+    
+    
     /// System Prompt
     XData INSTRUCTIONS [ MimeType = text/markdown ]
     {
     # Sample Assistant
 
-    You are a helpful assistant with access to a set of MCP tools from the
-    `server-everything` reference server. Use these tools to answer user requests.
+    You are a helpful assistant with access to a set of tools to interact with a database of people.
     }
 
-    ClassMethod DemoChat() As %Status
-    {
-        Set agent = ..%New()
-        set session = agent.%NewSession()
-        Set request = "Add a person named Alice aged 30, and then get people younger than 35."
-        Set response = agent.Chat(session, request)
-        Write response
+    Method %CreateProvider() As %Status {
+        Set apiKey = $System.Util.GetEnviron("OPENAI_API_KEY")
+        If apiKey = "" {
+            Quit $$$ERROR($$$GeneralError, "OPENAI_API_KEY is not set")
+        }
+
+        Set sc = $$$OK
+        Try {
+            Set settings = {"api_key": (apiKey)}
+            Set ..Provider = ##class(%AI.Provider).Create(..#PROVIDER, settings)
+        } Catch ex {
+            Set sc = $$$ERROR($$$GeneralError, "Failed to create provider '" _ ..#PROVIDER _ "': " _ ex.DisplayString())
+        }
+
+        If $$$ISERR(sc) Quit sc
+        Quit $$$OK
     }
+
+
 }

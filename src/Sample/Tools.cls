@@ -1,4 +1,4 @@
-Class Sample.Tool Extends %AI.Tool
+Class Sample.Tools Extends %AI.Tool
 {
 
 /// Tool to add a person to the database
