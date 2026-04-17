@@ -7,6 +7,7 @@ This repo provides a template to kickstart development with AI Hub.
 - **./skills** - agent skills with information on using AI hub for AI agents. Move these to a suitable location for your preferred AI coding agent. 
 - **./src/Sample** - Basic sample classes for tools, toolsets, agents and MCP servers. These are installed with zpm when the container is build.  
 - **./src/Python** - An example stdio MCP server defined in Python and used in the IRIS Toolsets 
+- **Datasets.MD** - Includes a note on some datasets or tools to import datasets available on Open Exchange for easy install 
 
 ## Quickstart
 
@@ -66,7 +67,7 @@ docker-compose exec -it iris iris session iris
 
 ## Testing Sample agent 
 
-There is a basic agent in src/Sample.Agent
+There is a basic agent in src/Sample.Agent, a simple way to use it from objectscript is to run the following (note this does require an OPENAI_API_KEY to be added to .env before running th container). 
 
 ```objectscript
 set $NAMESPACE= "IRISAPP"
