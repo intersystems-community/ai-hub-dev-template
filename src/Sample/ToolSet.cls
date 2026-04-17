@@ -4,10 +4,9 @@ Class Sample.ToolSet Extends %AI.ToolSet [dependsOn=Sample.Tool, dependsOn=Sampl
     {
         <ToolSet>
             <Description>Sample Toolset</Description>
-            <Policies>
-                <Audit Class="Sample.AuditPolicy"></Audit>
-                <Authorization Class="Sample.AuthPolicy"></Authorization>
-            </Policies>
+            <MCP Name="PythonServer">
+                <Stdio Executable="/home/irisowner/.venvs/mcp-tools/bin/python" Args="-I /home/irisowner/dev/src/Python/multiplication_mcp.py" />
+            </MCP>
             <Include Class="Sample.Tool"></Include>
         </ToolSet>
     }    

@@ -8,7 +8,6 @@ Method AddPerson(name As %String, age As %Integer){
     Set person.Age = age
     Do person.%Save()
 }
-
 /// Tool query database for people younger than a specified age
 Query GetPeopleYoungerThan(age As %Integer) As %SQLQuery(
     ROWSPEC = "Name:%String,Age:%Integer") [ SqlProc ]

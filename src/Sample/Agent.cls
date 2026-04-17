@@ -22,8 +22,9 @@ Class Sample.Agent Extends %AI.Agent
     ClassMethod DemoChat() As %Status
     {
         Set agent = ..%New()
+        set session = agent.%NewSession()
         Set request = "Add a person named Alice aged 30, and then get people younger than 35."
-        Set response = agent.Chat(request)
+        Set response = agent.Chat(session, request)
         Write response
     }
 }
