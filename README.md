@@ -26,7 +26,9 @@ After this, you can run:
 docker images
 ```
 
-And you should see an image called `docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.147.0`
+And you should see an image called `docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.147.0`. If you have downloaded an arm64 container, this tag will be slightly different. **Make sure to change the tag at the top of the Dockerfile to the correct one for your operating system**.
+
+If you have a license key and want to use a licensed version, again ensure to download the correct container for your operating system, then change the tag at the top of a docker file. In this case, you will also need to run web-gateway in the docker-compose project. 
 
 ### Build Template Repo
 

@@ -1,4 +1,3 @@
-ARG IMAGE=docker.iscinternal.com/docker-intersystems/intersystems/irishealth-community:2026.2.0AI.147.0
 ARG IMAGE=docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.147.0
 FROM $IMAGE as builder
 
