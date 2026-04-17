@@ -7,7 +7,7 @@ This repo provides a template to kickstart development with AI Hub.
 - **./skills** - agent skills with information on using AI hub for AI agents. Move these to a suitable location for your preferred AI coding agent. 
 - **./src/Sample** - Basic sample classes for tools, toolsets, agents and MCP servers. These are installed with zpm when the container is build.  
 - **./src/Python** - An example stdio MCP server defined in Python and used in the IRIS Toolsets 
-- **Datasets.MD** - Includes a note on some datasets or tools to import datasets available on Open Exchange for easy install 
+- **Datasets.md** - Notes on some datasets or tools to import datasets available on Open Exchange for easy install 
 
 ## Quickstart
 
@@ -105,7 +105,7 @@ Then start the `iris-mcp-server`
 iris-mcp-server -c config.toml run 
 ```
 
-You can now connect the MCP server to your MCP Client of choice (e.g. Claude Code) using the address: http://localhost:52773/mcp/sample. 
+You can now connect the MCP server to your MCP Client of choice (e.g. coding agents like claude code) using the address: http://localhost:8080/mcp/sample. 
 
 An example python MCP client is shown in test_mcp_connection.py, which uses Langchain's MCP adapters module. To try this, run: 
 
