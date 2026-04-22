@@ -17,7 +17,7 @@ Download an AI Hub container from the [Early Access Program Portal](https://eval
 Then load the image with: 
 
 ```bash
-docker load -i /path/to/iris-community-2026.2.0AI.147.0-docker.tar.gz
+docker load -i /path/to/iris-community-2026.2.0AI.156.0-docker.tar.gz
 ```
 
 After this, you can run:

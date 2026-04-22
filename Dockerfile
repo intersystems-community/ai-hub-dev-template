@@ -1,4 +1,4 @@
-ARG IMAGE=docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.147.0
+ARG IMAGE=docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.156.0
 FROM $IMAGE as builder
 
 WORKDIR /home/irisowner/dev
@@ -32,9 +32,7 @@ COPY requirements.txt /home/irisowner/dev/requirements.txt
 ENV PYTHONPATH="/usr/irissys/lib/python"
 ENV PATH "/usr/irissys/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/irisowner/bin"
 WORKDIR /home/irisowner/dev
-# Keep the stdio MCP venv outside /home/irisowner/dev because docker-compose
-# bind-mounts that path at runtime and would hide any build-time .venv there.
-# Clear PYTHONPATH and use -I because IRIS injects /usr/irissys/mgr/python.
+
 RUN --mount=type=bind,source=/,target=/builder/root,from=builder \
     cp -f /builder/root/usr/irissys/iris.cpf /usr/irissys/iris.cpf && \
     python3 /home/irisowner/dev/copy-data.py -c /usr/irissys/iris.cpf -d /builder/root/ && \
