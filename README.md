@@ -9,45 +9,45 @@ This repo provides a template to kickstart development with AI Hub.
 - **./src/Python** - An example stdio MCP server defined in Python and used in the IRIS Toolsets 
 - **Datasets.md** - Notes on some datasets or tools to import datasets available on Open Exchange for easy install 
 
-## Quickstart
+## Using the template
 
 ### Download AI Hub Container
-Download an AI Hub container from the [Early Access Program Portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). The docker-containers end with `docker.tar.gz`, ensure you choose the version suitable for your operating system (arm64 for macOS).
 
-Then load the image with: 
 
-```bash
-docker load -i /path/to/iris-community-2026.2.0AI.156.0-docker.tar.gz
-```
+1. Download an AI Hub container from the [Early Access Program Portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). The docker-containers end with `docker.tar.gz`, ensure you choose the version suitable for your operating system (arm64 for macOS).
 
-After this, you can run:
+2. Load the image with: 
 
-```bash
-docker images
-```
+    ```bash
+    docker load -i /path/to/iris-community-2026.2.0AI.158.0-docker.tar.gz
+    ```
 
-And you should see an image called `docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.147.0`. If you have downloaded an arm64 container, this tag will be slightly different. **Make sure to change the tag at the top of the Dockerfile to the correct one for your operating system**.
+    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.158.0` (if not you can use `docker images` to find the image name). 
 
-If you have a license key and want to use a licensed version, again ensure to download the correct container for your operating system, then change the tag at the top of a docker file. In this case, you will also need to run web-gateway in the docker-compose project. 
+3. Change the Image name in the Dockerfile to match your version and operating system (image name printed above).
+
+
 
 ### Build Template Repo
 
-After this you can clone this repo: 
+4. Clone this repo: 
 
 ```bash
 git clone https://github.com/intersystems-community/ai-hub-dev-template
 cd ai-hub-dev-template
 ```
 
-First, in order to use the Agent demo, add an OPENAI_API_KEY to a file called .env in this repo. You can see an example in .env.example.
+5. (Optional) Add an OPENAI_API_KEY to a file called .env in this repo. You can see an example in .env.example.
 
-Then build the project with: 
+6. Build the container with: 
 
 ```bash
 docker-compose up -d --build 
 ```
 
-## Accessing IRIS 
+## Using IRIS AI Hub Container
+
+### Accessing IRIS 
 
 You can find the Management Portal at http://localhost:52773/csp/sys/UtilHome.csp.
 
@@ -66,8 +66,7 @@ or the bash terminal with:
 docker-compose exec -it iris iris session iris
 ```
 
-
-## Testing Sample agent 
+### Testing Sample agent 
 
 There is a basic agent in src/Sample.Agent, a simple way to use it from objectscript is to run the following (note this does require an OPENAI_API_KEY to be added to .env before running th container). 
 
@@ -85,7 +84,7 @@ Set response = agent.Chat(session, request)
 write response.content
 ```
 
-## Test MCP Server
+### Test MCP Server
 
 The build process installs an MCP server web application at http://localhost:52773/mcp/sample. You can check this MCP server is running by going to http://localhost:52773/mcp/sample/v1/services. 
 
