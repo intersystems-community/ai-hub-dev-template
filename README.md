@@ -16,15 +16,19 @@ This repo provides a template to kickstart development with AI Hub.
 
 1. Download an AI Hub container from the [Early Access Program Portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). The docker-containers end with `docker.tar.gz`, ensure you choose the version suitable for your operating system (arm64 for macOS).
 
+OR 
+
+1. Copy AI Hub Container from your Flash Drive
+
 2. Load the image with: 
 
     ```bash
-    docker load -i /path/to/iris-community-2026.2.0AI.158.0-docker.tar.gz
+    docker load -i /path/to/irishealth-community-2026.2.0AI.158.0-docker.tar.gz
     ```
 
     Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.158.0` (if not you can use `docker images` to find the image name). 
 
-3. Change the Image name in the Dockerfile to match your version and operating system (image name printed above).
+3. Change the Image name in the [Dockerfile](./Dockerfile) to match your version and operating system (image name printed above).
 
 
 
