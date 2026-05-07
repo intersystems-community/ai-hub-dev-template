@@ -1,4 +1,4 @@
-# READY Hackathon Dev Template
+# AI Hub Dev Template
 
 This repo provides a template to kickstart development with AI Hub. 
 
@@ -7,12 +7,10 @@ This repo provides a template to kickstart development with AI Hub.
 - **./skills** - agent skills with information on using AI hub for AI agents. Move these to a suitable location for your preferred AI coding agent. 
 - **./src/Sample** - Basic sample classes for tools, toolsets, agents and MCP servers. These are installed with zpm when the container is build.  
 - **./src/Python** - An example stdio MCP server defined in Python and used in the IRIS Toolsets 
-- **Datasets.md** - Notes on some datasets or tools to import datasets available on Open Exchange for easy install 
 
 ## Using the template
 
 ### Download AI Hub Container
-
 
 1. Download an AI Hub container from the [Early Access Program Portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). The docker-containers end with `docker.tar.gz`, ensure you choose the version suitable for your operating system (arm64 for macOS).
 
@@ -41,7 +39,7 @@ git clone https://github.com/intersystems-community/ai-hub-dev-template
 cd ai-hub-dev-template
 ```
 
-5. Add an OPENAI_API_KEY to a file called .env in this repo. You can see an example in .env.example. This .env file is required for the container to build. If you want to use another provider, change the Sample.Agent class in src/. 
+5. Add an OPENAI_API_KEY to a file called .env in this repo. You can see an example in .env.example. If you want to use another provider, change the Sample.Agent class in src/. If you don't want to use any agents at the moment (e.g. you want to create MCP tools to access from outside the container), create an empty .env file (`touch .env`) or remove the `env_file` tag from [docker-compose.yml](./docker-compose.yml)
 
 6. Build the container with: 
 
@@ -113,7 +111,7 @@ The build process installs an MCP server web application at http://localhost:527
 
 For the MCP Server to be usable, there is an additional step of starting this via a Rust binary which connects to IRIS through the web gateway protocol. The Binary is installed in `/usr/irissys/bin` (should already be in PATH).  
 
-A sample configuration is shown in [config.toml](./config.toml), which serves a remote HTTP server on port 8080 (which is exposed by the docker-compose file). 
+A sample configuration is shown in [config.toml](./config.toml), which serves a remote HTTP server on port 8080 (which is exposed by the docker-compose file). **Please note, the port for the remote HTTP server is not the same as the web server port!** 
 
 To start the transport, open a bash terminal within the container: 
 
