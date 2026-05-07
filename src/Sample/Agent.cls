@@ -1,14 +1,10 @@
 Class Sample.Agent Extends %AI.Agent
 {
-    /// LLM Provider
-    Parameter PROVIDER = "openai";
-
     /// LLM Model
     Parameter MODEL = "gpt-5-nano";
 
     /// Toolsets that the agent can use
     Parameter TOOLSETS = "Sample.ToolSet";
-    
     
     /// System Prompt
     XData INSTRUCTIONS [ MimeType = text/markdown ]
@@ -18,22 +14,17 @@ Class Sample.Agent Extends %AI.Agent
     You are a helpful assistant with access to a set of tools to interact with a database of people.
     }
 
-    Method %CreateProvider() As %Status {
-        Set apiKey = $System.Util.GetEnviron("OPENAI_API_KEY")
-        If apiKey = "" {
-            Quit $$$ERROR($$$GeneralError, "OPENAI_API_KEY is not set")
-        }
-
-        Set sc = $$$OK
-        Try {
-            Set settings = {"api_key": (apiKey)}
-            Set ..Provider = ##class(%AI.Provider).Create(..#PROVIDER, settings)
-        } Catch ex {
-            Set sc = $$$ERROR($$$GeneralError, "Failed to create provider '" _ ..#PROVIDER _ "': " _ ex.DisplayString())
-        }
-
-        If $$$ISERR(sc) Quit sc
-        Quit $$$OK
+    Method %OnInit() As %Status
+    {
+        // Set provider with API key from environment variable
+        Set key = $System.Util.GetEnviron("OPENAI_API_KEY")  // or whatever
+        Set ..Provider = ##class(%AI.Provider).Create("openai", {"api_key": (key)})
+        
+        // Add Console tool logging
+        Set policy = ##class(%AI.Policy.ConsoleAudit).%New()
+        Do ..ToolManager.SetAuditPolicy(policy)
+        
+        Return $$$OK
     }
 
 

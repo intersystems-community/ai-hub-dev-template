@@ -23,10 +23,10 @@ OR
 2. Load the image with: 
 
     ```bash
-    docker load -i /path/to/irishealth-community-2026.2.0AI.158.0-docker.tar.gz
+    docker load -i /path/to/iris-community-2026.2.0AI.162.0-docker.tar.gz
     ```
 
-    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.158.0` (if not you can use `docker images` to find the image name). 
+    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.162.0` (if not you can use `docker images` to find the image name). 
 
 3. Change the Image name in the [Dockerfile](./Dockerfile) to match your version and operating system (image name printed above).
 
@@ -41,7 +41,7 @@ git clone https://github.com/intersystems-community/ai-hub-dev-template
 cd ai-hub-dev-template
 ```
 
-5. (Optional) Add an OPENAI_API_KEY to a file called .env in this repo. You can see an example in .env.example.
+5. Add an OPENAI_API_KEY to a file called .env in this repo. You can see an example in .env.example. This .env file is required for the container to build. If you want to use another provider, change the Sample.Agent class in src/. 
 
 6. Build the container with: 
 
@@ -75,17 +75,36 @@ docker-compose exec -it iris iris session iris
 There is a basic agent in src/Sample.Agent, a simple way to use it from objectscript is to run the following (note this does require an OPENAI_API_KEY to be added to .env before running th container). 
 
 ```objectscript
-set $NAMESPACE= "IRISAPP"
+zn "IRISAPP"
 Set agent = ##class(Sample.Agent).%New()
 Set sc = agent.%Init()
 write:sc'=1 $SYSTEM.Status.GetErrorText(sc), !
 
 Set session = agent.CreateSession()
 
-// This requires using both tools defined in Sample.Tools and packaged in Sample.ToolSet
-Set request = "Add a person named Alice aged 30, and then get people younger than 35."
+Set request = "What tools do you have?"
 Set response = agent.Chat(session, request)
-write response.content
+Do ##class(%AI.System).RenderMarkdown(response.Content)
+```
+
+You can also use the agents in streaming mode as follows: 
+
+```objectscript
+// Create Stream Renderer
+Set renderer = ##class(%AI.Shell.StreamRenderer).%New()
+
+// Request requires using both tools defined in Sample.Tools and packaged in Sample.ToolSet
+Set request = "Add a person named Peter aged 16, and then get people younger than 35."
+
+// Stream Response
+Set response = agent.StreamChat(session, request , renderer, "OnChunk")
+
+```
+
+### Try an interactive Chat Shell
+
+```objectscript
+do ##class(%AI.System).Shell("openai", $System.Util.GetEnviron("OPENAI_API_KEY"), "gpt-5-nano", "Sample.ToolSet")
 ```
 
 ### Test MCP Server
@@ -110,9 +129,10 @@ iris-mcp-server -c config.toml run
 
 You can now connect the MCP server to your MCP Client of choice (e.g. coding agents like claude code) using the address: http://localhost:8080/mcp/sample. 
 
-An example python MCP client is shown in test_mcp_connection.py, which uses Langchain's MCP adapters module. To try this, run: 
+An example python MCP client is shown in [test_mcp.py](./test_mcp.py), which uses Langchain's MCP adapters module. To try this, run: 
 
 ```bash
 pip install langchain-mcp-adapters
 python test_mcp.py
 ```
+
