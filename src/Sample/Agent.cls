@@ -20,10 +20,6 @@ Class Sample.Agent Extends %AI.Agent
         Set key = $System.Util.GetEnviron("OPENAI_API_KEY")  // or whatever
         Set ..Provider = ##class(%AI.Provider).Create("openai", {"api_key": (key)})
         
-        // Add Console tool logging
-        Set policy = ##class(%AI.Policy.ConsoleAudit).%New()
-        Do ..ToolManager.SetAuditPolicy(policy)
-        
         Return $$$OK
     }
 
