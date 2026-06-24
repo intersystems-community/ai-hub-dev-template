@@ -65,7 +65,7 @@ docker-compose exec -it iris iris session iris
 or the bash terminal with:
 
 ```bash
-docker-compose exec -it iris iris session iris
+docker-compose exec -it iris bash
 ```
 
 ### Testing Sample agent 
