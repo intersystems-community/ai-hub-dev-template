@@ -7,7 +7,7 @@ AUTH_HEADER = base64.b64encode(b"SuperUser:SYS").decode("utf-8")
 async def get_tools():
     client = MultiServerMCPClient(
         {
-            "minimal": {
+            "sample": {
                 "transport": "http",
                 "url": "http://localhost:8080/mcp/sample",
                 "headers": {"Authorization": f"Basic {AUTH_HEADER}"},
@@ -16,6 +16,7 @@ async def get_tools():
     )
 
     tools = await client.get_tools()
+    
     for tool in tools: 
         print("- ", tool.name)
     print("Available MCP tools:")
@@ -34,11 +35,6 @@ async def get_tools():
             except Exception as e:
                 print(f"Error invoking {tool.name}: {e}")
         
-
-
-
-
-    
     return tools 
 
 async def main():
