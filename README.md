@@ -14,9 +14,6 @@ This repo provides a template to kickstart development with AI Hub.
 
 1. Download an AI Hub container from the [Early Access Program Portal](https://evaluation.intersystems.com/Eval/early-access/AIHub). The docker-containers end with `docker.tar.gz`, ensure you choose the version suitable for your operating system (arm64 for macOS).
 
-OR 
-
-1. Copy AI Hub Container from your Flash Drive
 
 2. Load the image with: 
 
@@ -27,7 +24,6 @@ OR
     Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.162.0` (if not you can use `docker images` to find the image name). 
 
 3. Change the Image name in the [Dockerfile](./Dockerfile) to match your version and operating system (image name printed above).
-
 
 
 ### Build Template Repo
@@ -111,7 +107,11 @@ The build process installs an MCP server web application at http://localhost:527
 
 For the MCP Server to be usable, there is an additional step of starting this via a Rust binary which connects to IRIS through the web gateway protocol. The Binary is installed in `/usr/irissys/bin` (should already be in PATH).  
 
-A sample configuration is shown in [config.toml](./config.toml), which serves a remote HTTP server on port 8080 (which is exposed by the docker-compose file). **Please note, the port for the remote HTTP server is not the same as the web server port!** 
+A sample configuration is shown in [config_html.toml](./config_http.toml), which serves a remote HTTP server on port 8080 (which is exposed by the docker-compose file). **Please note, the port for the remote HTTP server is not the same as the web server port!** 
+
+A second sample configuration is shown for a local stdio server in [config_stdio.html](./config_stdio.toml). Note, stdio servers require the agent to be running on the same machine as the `iris-mcp-server` binary, making it trickier to use with containers, as such the full instructions to use this are not included here.
+
+#### HTTP 
 
 To start the transport, open a bash terminal within the container: 
 
@@ -133,4 +133,13 @@ An example python MCP client is shown in [test_mcp.py](./test_mcp.py), which use
 pip install langchain-mcp-adapters
 python test_mcp.py
 ```
+
+
+
+## More Info 
+
+For more information on this template and AI Hub in general, see some of the following: 
+- [An Introduction to AI Hub, Part 1: Agents in ObjectScript | ISC Developer Community ](https://community.intersystems.com/post/introduction-ai-hub-part-1-agents-objectscript) and [Part 2: Custom MCP Servers | ISC Developer Community](https://community.intersystems.com/post/introduction-ai-hub-part-2-custom-mcp-servers)
+- [ai-hub-eap](https://github.com/intersystems-community/ai-hub-eap/tree/master) for documentation and bug reporting
+- [Building AI Applications with InterSystems AI Hub | Learning Service (4 mins)](https://learning.intersystems.com/course/view.php?id=2872)
 
