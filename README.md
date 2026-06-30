@@ -18,10 +18,10 @@ This repo provides a template to kickstart development with AI Hub.
 2. Load the image with: 
 
     ```bash
-    docker load -i /path/to/iris-community-2026.2.0AI.162.0-docker.tar.gz
+    docker load -i /path/to/iris-community-2026.3.0AI.108.0-docker.tar.gz
     ```
 
-    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.2.0AI.162.0` (if not you can use `docker images` to find the image name). 
+    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.108.0` (if not you can use `docker images` to find the image name). 
 
 3. Change the Image name in the [Dockerfile](./Dockerfile) to match your version and operating system (image name printed above).
 
