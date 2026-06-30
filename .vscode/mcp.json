@@ -4,17 +4,6 @@
 			"url": "http://localhost:8080/mcp/sample",
 			"type": "http"
 		},
-		"my-stdio-server": {
-			"type": "stdio",
-
-			"command": "wsl",
-			"args": [
-				"/mnt/c/Users/ging/external_hackathon/ai-hub-dev-template/iris-mcp-server",
-				"-c",
-				"config_stdio.toml",
-				"run"
-			]
-		}
 	},
 	"inputs": []
 }
