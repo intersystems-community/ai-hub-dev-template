@@ -45,6 +45,9 @@ docker-compose up -d --build
 
 ## Using IRIS AI Hub Container
 
+>[!CAUTION]
+> In the container start-up, the `Sample` directory is installed with IPM/ZPM. If you want to use this template for your own development and want to delete this directory, ensure you edit the module.xml file to remove the Sample directory and invocation, or rmeove the iris.script `zpm load` command.
+
 ### Accessing IRIS 
 
 You can find the Management Portal at http://localhost:52773/csp/sys/UtilHome.csp.
