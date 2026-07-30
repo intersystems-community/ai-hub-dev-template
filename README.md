@@ -18,10 +18,10 @@ This repo provides a template to kickstart development with AI Hub.
 2. Load the image with: 
 
     ```bash
-    docker load -i /path/to/iris-community-2026.3.0AI.108.0-docker.tar.gz
+    docker load -i /path/to/iris-community-2026.3.0AI.126.0-docker.tar.gz
     ```
 
-    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.108.0` (if not you can use `docker images` to find the image name). 
+    Once it's complete you should see `Loaded image: docker.iscinternal.com/docker-intersystems/intersystems/iris-community:2026.3.0AI.126.0` (if not you can use `docker images` to find the image name). 
 
 3. Change the Image name in the [Dockerfile](./Dockerfile) to match your version and operating system (image name printed above).
 
@@ -46,7 +46,7 @@ docker-compose up -d --build
 ## Using IRIS AI Hub Container
 
 >[!CAUTION]
-> In the container start-up, the `Sample` directory is installed with IPM/ZPM. If you want to use this template for your own development and want to delete this directory, ensure you edit the module.xml file to remove the Sample directory and invocation, or rmeove the iris.script `zpm load` command.
+> In the container start-up, the `Sample` directory is installed with IPM/ZPM. If you want to use this template for your own development and want to delete this directory, ensure you edit the module.xml file to remove the Sample directory and invocation, or remove the iris.script `zpm load` command.
 
 ### Accessing IRIS 
 
