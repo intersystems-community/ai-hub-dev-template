@@ -9,3 +9,7 @@ endpoints = [
 transport = "http"
 port=8080
 host="0.0.0.0"
+
+# Allow connections without any Authorization headers
+# Connections to an authenticated endpoint will still be blocked by the WG auth
+allow_anonymous = true 
